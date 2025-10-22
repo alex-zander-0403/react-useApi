@@ -1,12 +1,79 @@
-# React + Vite
+# 🧑‍💻 Custom Hook useApi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Простое React-приложение для управления списком пользователей с использованием кастомного хука `useApi` и MockAPI.
 
-Currently, two official plugins are available:
+## 📋 Описание
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Это приложение предоставляет полнофункциональный интерфейс для управления пользователями с помощью переиспользуемого хука `useApi`, который инкапсулирует всю логику работы с API. MockAPI позволяет сохранять изменения.
 
-## Expanding the ESLint configuration
+## 🛠 Технологии
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 18
+- Custom Hooks (useApi)
+- CSS3
+- MockAPI (реальная база данных)
+- React Hooks (useState, useCallback)
+
+## 📦 Установка и запуск
+
+---
+
+## 🎯 Использование
+
+1. Нажмите кнопку "Управление списком" для отображения форм управления
+2. Используйте соответствующие формы для:
+   - Добавления нового пользователя (данные сохраняются в базе)
+   - Обновления данных существующего пользователя
+   - Удаления пользователя по ID
+3. Нажмите "Скрыть" чтобы скрыть панель управления
+
+## 🔧 Custom useApi Hook
+
+- **Универсальность** - работает с любым REST API
+- **Состояние загрузки** - автоматическое управление состоянием isLoading
+- **Обработка ошибок** - централизованная обработка ошибок
+- **Методы HTTP** - поддержка GET, POST, PUT, DELETE
+
+### Использование хука:
+
+```jsx
+const api = useApi("https://your-mockapi-endpoint.mockapi.io");
+
+// GET запрос
+api.get("users");
+
+// POST запрос
+api.post("users", {
+  name: "John",
+  email: "john@example.com",
+  createdAt: new Date().toISOString(),
+});
+
+// PUT запрос
+api.put("users/1", {
+  name: "John Updated",
+  email: "john@example.com",
+});
+
+// DELETE запрос
+api.remove("users/1");
+```
+
+## 🔄 API Эндпоинты
+
+Приложение использует MockAPI с следующими эндпоинтами:
+
+- `GET /users` - получение списка всех пользователей
+- `POST /users` - добавление нового пользователя
+- `PUT /users/:id` - полное обновление пользователя
+- `DELETE /users/:id` - удаление пользователя
+
+### 2. Пример структуры данных в MockAPI:
+
+```json
+{
+  "id": "1",
+  "name": "John Doe",
+  "hasCar": true
+}
+```
